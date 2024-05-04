@@ -71,9 +71,9 @@ def get_pie_chart(selected_site):
         fig = px.pie(spacex_df, values='class', names='Launch Site', title='Success Pie Chart for All Sites')
     else:
         filtered_df = spacex_df[spacex_df['Launch Site'] == selected_site]
-        fig = px.pie(filtered_df, values='class', names='class', title='Success Pie Chart for ' + selected_site)
+        grouped_df = filtered_df.groupby('class').size().reset_index(name='count')
+        fig = px.pie(grouped_df, values='count', names='class', title='Success Pie Chart for ' + selected_site)
     return fig
-
 
 # TASK 4:
 # Add a callback function for `site-dropdown` and `payload-slider` as inputs, `success-payload-scatter-chart` as output
